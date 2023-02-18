@@ -78,7 +78,7 @@ jobs:
         endif()
 
     - name: Install dependencies
-      shell: bash
+      shell: cmake -P {0}
       run: |
         if ("${{ runner.os }}" STREQUAL "Windows")
           echo "NEED DOXYGEN"
