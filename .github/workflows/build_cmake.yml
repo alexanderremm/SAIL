@@ -35,6 +35,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
+    - name: Install Clang
+      uses: egor-tensin/setup-clang@v1.4
+
+
     - name: Download Ninja and CMake
       id: cmake_and_ninja
       shell: cmake -P {0}
@@ -81,13 +85,16 @@ jobs:
       shell: cmake -P {0}
       run: |
         if ("${{ runner.os }}" STREQUAL "Windows")
-          execute_process(COMMAND pip install graphviz)
+          execute_process(COMMAND echo Done.)
         elseif ("${{ runner.os }}" STREQUAL "Linux")
           execute_process(COMMAND sudo apt-get install -y doxygen graphviz)
         elseif ("${{ runner.os }}" STREQUAL "macOS")
           execute_process(COMMAND brew install doxygen)
           execute_process(COMMAND brew install graphviz)
         endif()
+
+    - name: Setup Graphviz
+      uses: ts-graphviz/setup-graphviz@v1
 
     - name: Configure
       shell: cmake -P {0}
