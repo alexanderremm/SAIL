@@ -81,13 +81,13 @@ jobs:
       shell: cmake -P {0}
       run: |
         if ("${{ runner.os }}" STREQUAL "Windows")
-          echo "NEED DOXYGEN"
+          execute_process(COMMAND "echo NEED DOXYGEN")
         elseif ("${{ runner.os }}" STREQUAL "Linux")
-          sudo apt-get install -y doxygen
+          execute_process(COMMAND "sudo apt-get install -y doxygen")
         elseif ("${{ runner.os }}" STREQUAL "macOS")
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-          brew install doxygen
+          execute_process(COMMAND "/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"")
+          execute_process(COMMAND "echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile")
+          execute_process(COMMAND "brew install doxygen")
         endif()
 
     - name: Configure
