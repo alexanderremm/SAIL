@@ -9,8 +9,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-find_package(googletest REQUIRED)
-
 enable_testing()
 
 file(GLOB_RECURSE TEST_FILES
