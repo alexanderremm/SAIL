@@ -155,7 +155,7 @@ jobs:
 
         execute_process(
           COMMAND ${{ steps.cmake_and_ninja.outputs.cmake_dir }}/ctest -j ${N}
-          WORKING_DIRECTORY build
+          WORKING_DIRECTORY build/test
           RESULT_VARIABLE result
         )
         if (NOT result EQUAL 0)
