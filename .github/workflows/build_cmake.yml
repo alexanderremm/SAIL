@@ -81,13 +81,12 @@ jobs:
       shell: cmake -P {0}
       run: |
         if ("${{ runner.os }}" STREQUAL "Windows")
-          execute_process(COMMAND echo NEED DOXYGEN)
+          execute_process(COMMAND winget install graphviz)
         elseif ("${{ runner.os }}" STREQUAL "Linux")
-          execute_process(COMMAND sudo apt-get install -y doxygen)
+          execute_process(COMMAND sudo apt-get install -y doxygen graphviz)
         elseif ("${{ runner.os }}" STREQUAL "macOS")
-          execute_process(COMMAND /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
-          execute_process(COMMAND echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile)
           execute_process(COMMAND brew install doxygen)
+          execute_process(COMMAND brew install graphviz)
         endif()
 
     - name: Configure
