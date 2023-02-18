@@ -81,7 +81,7 @@ jobs:
       shell: bash
       run: |
         if ("${{ runner.os }}" STREQUAL "Windows")
-          
+          echo "NEED DOXYGEN"
         elseif ("${{ runner.os }}" STREQUAL "Linux")
           sudo apt-get install -y doxygen
         elseif ("${{ runner.os }}" STREQUAL "macOS")
