@@ -10,12 +10,8 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
-        compiler: [gcc]
-        include:
-          - os: windows-latest
-            compiler: [msvc]
-    name: ${{ matrix.os }}-${{ matrix.compiler }}-$BUILD_TYPE
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    name: ${{ matrix.os }}-${{ matrix.compiler }}-${{ env.BUILD_TYPE }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
