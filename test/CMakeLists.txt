@@ -1,6 +1,5 @@
 include(FetchContent)
 
-set(gtest_force_shared_crt ON)
 FetchContent_Declare(
     googletest
     GIT_REPOSITORY https://github.com/google/googletest.git
@@ -8,6 +7,8 @@ FetchContent_Declare(
     GIT_SHALLOW    True
     OVERRIDE_FIND_PACKAGE
 )
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
