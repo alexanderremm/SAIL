@@ -11,10 +11,10 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest]
-        compiler: gcc
+        compiler: "gcc"
         include:
           - os: windows-latest
-            compiler: msvc
+            compiler: "msvc"
     name: ${{ matrix.os }}-${{ matrix.compiler }}-${{ env.BUILD_TYPE }}
     runs-on: ${{ matrix.os }}
     steps:
@@ -31,7 +31,7 @@ jobs:
           elseif ("${{ runner.os }}" STREQUAL "macOS")
             execute_process(COMMAND brew install doxygen)
           endif()
-          
+
       - name: Install Graphviz
         uses: ts-graphviz/setup-graphviz@v1
 
