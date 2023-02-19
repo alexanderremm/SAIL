@@ -1,0 +1,39 @@
+name: CMake Build Matrix
+
+on: [push]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        build_type: [Debug, Release]
+    name: ${{ matrix.os }}-${{ matrix.build_type }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Doxygen
+        shell: cmake -P {0}
+        run: |
+          if ("${{ runner.os }}" STREQUAL "Windows")
+            execute_process(COMMAND echo No dependencies to install.)
+          elseif ("${{ runner.os }}" STREQUAL "Linux")
+            execute_process(COMMAND sudo apt-get install -y doxygen)
+          elseif ("${{ runner.os }}" STREQUAL "macOS")
+            execute_process(COMMAND brew install doxygen)
+          endif()
+
+      - name: Install Graphviz
+        uses: ts-graphviz/setup-graphviz@v1
+
+      - name: Configure CMake
+        run: cmake -B ${{ github.workspace }}/build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        
+      - name: Build
+        run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build_type }}
+        
+      - name: Test
+        working-directory: ${{ github.workspace }}/build/test
+        run: ctest -C ${{ matrix.build_type }}
