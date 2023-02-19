@@ -12,3 +12,6 @@ _deps
 build
 install
 docs/html
+
+# Source files that are configured
+src/version.cpp
