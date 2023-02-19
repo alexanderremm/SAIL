@@ -7,7 +7,7 @@ TEST(Version, SemanticVersion) {
 }
 
 TEST(Version, MajorVersion) {
-    ASSERT_EQ("1", sail::version::get_major_version());
+    ASSERT_EQ("0", sail::version::get_major_version());
 }
 
 TEST(Version, MinorVersion) {
